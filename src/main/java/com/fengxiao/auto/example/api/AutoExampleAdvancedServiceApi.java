@@ -1,11 +1,13 @@
 package com.fengxiao.auto.example.api;
 
+import com.fengxiao.auto.example.request.advanced.DistinctDto;
+import com.fengxiao.auto.example.request.advanced.ManyEqualToDto;
+import com.fengxiao.auto.example.request.advanced.MultiCriteriaDto;
+import com.fengxiao.auto.example.request.advanced.NormalDto;
+import com.fengxiao.auto.example.request.advanced.NormalManyEqualToDto;
+import com.fengxiao.auto.example.request.advanced.OrderByDto;
+import com.fengxiao.auto.example.request.advanced.UseSecondaryCacheDto;
 import com.fengxiao.auto.example.request.basic.OrEqualToDto;
-import com.fengxiao.auto.example.request.criteria.DistinctDto;
-import com.fengxiao.auto.example.request.criteria.MultiCriteriaDto;
-import com.fengxiao.auto.example.request.criteria.NormalDto;
-import com.fengxiao.auto.example.request.criteria.OrderByDto;
-import com.fengxiao.auto.example.request.criteria.UseSecondaryCacheDto;
 import com.fengxiao.auto.example.response.ClientPage;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,4 +38,9 @@ public interface AutoExampleAdvancedServiceApi {
   @PostMapping("compatible/with/page/helper")
   ClientPage simpleCompatibleWithPageHelperTest(@RequestBody OrEqualToDto orEqualToDto);
 
+  @PostMapping("present/many/equal/to")
+  ClientPage simpleManyEqualToTest(@RequestBody ManyEqualToDto manyEqualToDto);
+
+  @PostMapping("present/normal/many/equal/to")
+  ClientPage simpleNormalManyEqualToTest(@RequestBody NormalManyEqualToDto normalManyEqualToDto);
 }

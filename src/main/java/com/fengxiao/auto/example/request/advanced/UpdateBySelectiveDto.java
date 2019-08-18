@@ -1,10 +1,10 @@
-package com.fengxiao.auto.example.request.criteria;
+package com.fengxiao.auto.example.request.advanced;
 
 
 import com.fengxiao.auto.example.entity.AdamResource;
 import com.fengxiao.auto.example.enums.ResourceType;
 import com.vipkid.auto.example.annotation.AutoExample;
-import lombok.EqualsAndHashCode;
+import com.vipkid.auto.example.annotation.Ignore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,15 +12,16 @@ import lombok.Setter;
  * @author hujun1
  * @date 2019-08-16 20:11
  */
-@AutoExample(value = AdamResource.class,useSecondaryCache = true)
+@AutoExample(AdamResource.class)
 @Getter
 @Setter
-@EqualsAndHashCode
-public class UseSecondaryCacheDto {
+public class UpdateBySelectiveDto {
 
   private String name;
 
   private ResourceType type;
 
+  @Ignore
+  private String chineseName;
 
 }

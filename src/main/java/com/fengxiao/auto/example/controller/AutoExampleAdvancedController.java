@@ -3,12 +3,14 @@ package com.fengxiao.auto.example.controller;
 import com.fengxiao.auto.example.api.AutoExampleAdvancedServiceApi;
 import com.fengxiao.auto.example.dao.AdamResourceMapper;
 import com.fengxiao.auto.example.entity.AdamResource;
+import com.fengxiao.auto.example.request.advanced.ManyEqualToDto;
+import com.fengxiao.auto.example.request.advanced.NormalManyEqualToDto;
 import com.fengxiao.auto.example.request.basic.OrEqualToDto;
-import com.fengxiao.auto.example.request.criteria.DistinctDto;
-import com.fengxiao.auto.example.request.criteria.MultiCriteriaDto;
-import com.fengxiao.auto.example.request.criteria.NormalDto;
-import com.fengxiao.auto.example.request.criteria.OrderByDto;
-import com.fengxiao.auto.example.request.criteria.UseSecondaryCacheDto;
+import com.fengxiao.auto.example.request.advanced.DistinctDto;
+import com.fengxiao.auto.example.request.advanced.MultiCriteriaDto;
+import com.fengxiao.auto.example.request.advanced.NormalDto;
+import com.fengxiao.auto.example.request.advanced.OrderByDto;
+import com.fengxiao.auto.example.request.advanced.UseSecondaryCacheDto;
 import com.fengxiao.auto.example.response.ClientPage;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -61,6 +63,39 @@ public class AutoExampleAdvancedController implements AutoExampleAdvancedService
     PageHelper.startPage(1, 5);
     List<AdamResource> adamResources = adamResourceMapper.selectByExample(orEqualToDto);
     return ClientPage.ok(adamResources,((Page)adamResources).getTotal());
+  }
+
+  @Override
+  public ClientPage simpleManyEqualToTest(@RequestBody ManyEqualToDto manyEqualToDto) {
+    return ClientPage.ok(adamResourceMapper.selectByExample(manyEqualToDto));
+  }
+
+  @Override
+  public ClientPage simpleNormalManyEqualToTest(@RequestBody NormalManyEqualToDto rDto) {
+    Example example = new Example(AdamResource.class);
+    Example.Criteria criteria = example.createCriteria();
+    if (null != rDto.getChineseName() && !"".equals(rDto.getChineseName())) {
+      criteria.andEqualTo("chineseName", rDto.getChineseName());
+    }
+    if (null != rDto.getName() && !"".equals(rDto.getName())) {
+      criteria.andEqualTo("name", rDto.getName());
+    }
+    if (null != rDto.getParentId()) {
+      criteria.andEqualTo("parentId", rDto.getParentId());
+    }
+    if (null != rDto.getDescription() && !"".equals(rDto.getDescription())) {
+      criteria.andEqualTo("description", rDto.getDescription());
+    }
+    if (null != rDto.getOwnerEmail() && !"".equals(rDto.getOwnerEmail())) {
+      criteria.andEqualTo("ownerEmail", rDto.getOwnerEmail());
+    }
+    if (null != rDto.getOwnerId()) {
+      criteria.andEqualTo("ownerId", rDto.getOwnerId());
+    }
+    if (null != rDto.getUpdatePerson() && !"".equals(rDto.getUpdatePerson())) {
+      criteria.andEqualTo("updatePerson", rDto.getUpdatePerson());
+    }
+    return ClientPage.ok(adamResourceMapper.selectByExample(example));
   }
 
 

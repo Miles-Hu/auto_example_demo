@@ -69,7 +69,7 @@ public class AdvancedTests extends BaseTests {
   }
 
   /**
-   * 二级缓存、一级缓存、不使用AutoExample，三者性能对比测试
+   * 一级缓存、二级缓存、不使用AutoExample，三者性能对比测试
    * @throws Exception
    */
   @Test
@@ -130,6 +130,32 @@ public class AdvancedTests extends BaseTests {
     String paramStr = JSONObject.toJSONString(param);
 
     executeTest("/test/advanced/compatible/with/page/helper", paramStr);
+
+  }
+
+  @Test
+  public void test7() throws Exception {
+    HashMap<String, Object> param = new HashMap<>();
+    param.put("name","testbymiles14");
+    param.put("type", "MODULE");
+    param.put("ownerId", 1);
+    param.put("ownerEmail", "abc@gmail.com");
+    String paramStr = JSONObject.toJSONString(param);
+
+    executeTest("/test/advanced/present/many/equal/to", paramStr);
+
+  }
+
+  @Test
+  public void test8() throws Exception {
+    HashMap<String, Object> param = new HashMap<>();
+    param.put("name","testbymiles14");
+    param.put("type", "MODULE");
+    param.put("ownerId", 1);
+    param.put("ownerEmail", "abc@gmail.com");
+    String paramStr = JSONObject.toJSONString(param);
+
+    executeTest("/test/advanced/present/normal/many/equal/to", paramStr);
 
   }
 

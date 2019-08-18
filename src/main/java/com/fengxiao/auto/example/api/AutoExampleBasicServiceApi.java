@@ -24,7 +24,7 @@ import com.fengxiao.auto.example.request.basic.OrLikeDto;
 import com.fengxiao.auto.example.request.basic.OrNotEqualToDto;
 import com.fengxiao.auto.example.request.basic.OrNotInDto;
 import com.fengxiao.auto.example.request.basic.OrNotLikeDto;
-import com.fengxiao.auto.example.request.criteria.UpdateBySelectiveDto;
+import com.fengxiao.auto.example.request.advanced.UpdateBySelectiveDto;
 import com.fengxiao.auto.example.response.ClientData;
 import com.fengxiao.auto.example.response.ClientPage;
 import com.fengxiao.auto.example.response.ClientStatus;

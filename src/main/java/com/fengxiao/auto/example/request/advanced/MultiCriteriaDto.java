@@ -1,4 +1,4 @@
-package com.fengxiao.auto.example.request.criteria;
+package com.fengxiao.auto.example.request.advanced;
 
 import com.fengxiao.auto.example.entity.AdamResource;
 import com.fengxiao.auto.example.enums.ResourceType;
