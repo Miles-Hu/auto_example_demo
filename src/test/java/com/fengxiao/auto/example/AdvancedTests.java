@@ -1,6 +1,7 @@
 package com.fengxiao.auto.example;
 
 import com.alibaba.fastjson.JSONObject;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
@@ -73,6 +74,7 @@ public class AdvancedTests extends BaseTests {
    * @throws Exception
    */
   @Test
+  @Ignore
   public void test5() throws Exception {
     HashMap<String, String> param = new HashMap<>();
     param.put("name","testbymiles14");
@@ -144,6 +146,11 @@ public class AdvancedTests extends BaseTests {
     String paramStr = JSONObject.toJSONString(param);
 
     executeTest("/test/advanced/present/many/equal/to", paramStr);
+
+    param.put("chineseName", "aaa");
+    paramStr = JSONObject.toJSONString(param);
+    executeTest("/test/advanced/present/many/equal/to", paramStr);
+
 
   }
 
