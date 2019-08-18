@@ -140,6 +140,7 @@ public class AdvancedTests extends BaseTests {
     param.put("type", "MODULE");
     param.put("ownerId", 1);
     param.put("ownerEmail", "abc@gmail.com");
+    param.put("chineseName", "");
     String paramStr = JSONObject.toJSONString(param);
 
     executeTest("/test/advanced/present/many/equal/to", paramStr);
