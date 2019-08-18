@@ -16,4 +16,4 @@ mapper:
 #以下配置不要在线上开启或者修改级别
 logging:
   level:
-    com.vipfengxiao.auto-example: DEBUG
+    com.fengxiao.auto.example: DEBUG

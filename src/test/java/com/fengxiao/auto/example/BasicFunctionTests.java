@@ -295,7 +295,7 @@ public class BasicFunctionTests extends BaseTests {
     HashMap<String, String> param = new HashMap<>();
     param.put("name","testbymiles14");
     param.put("type", "MODULE");
-    param.put("chineseName", "Hello Miles1!");
+    param.put("chineseName", "Hello Miles2!");
     String paramStr = JSONObject.toJSONString(param);
 
     executeTest("/test/update/by/example/selective", paramStr);
@@ -305,7 +305,7 @@ public class BasicFunctionTests extends BaseTests {
   @Test
   public void test28() throws Exception {
     HashMap<String, String> param = new HashMap<>();
-    param.put("name","testbymiles13");
+    param.put("name","testbymiles12");
     param.put("type", "MODULE");
     String paramStr = JSONObject.toJSONString(param);
 
