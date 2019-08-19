@@ -1,5 +1,6 @@
 package com.fengxiao.auto.example;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.Map;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -147,7 +150,8 @@ public class BaseTests {
         System.out.println(formatJson(result.getResponse().getContentAsString()));
     }
 
-    protected void executeTest(String url, String param)throws Exception {
+    protected void executeTest(String url, Map paramMap)throws Exception {
+        String param = JSONObject.toJSONString(paramMap);
         MvcResult mvcResult = getMockMvc().perform(MockMvcRequestBuilders.post(url)
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .content(param)

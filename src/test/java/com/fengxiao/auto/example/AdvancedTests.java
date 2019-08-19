@@ -1,6 +1,5 @@
 package com.fengxiao.auto.example;
 
-import com.alibaba.fastjson.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -20,13 +19,13 @@ public class AdvancedTests extends BaseTests {
     HashMap<String, Object> param = new HashMap<>();
     param.put("name","testbymiles14");
     List<String> types = new ArrayList<>();
-    types.add("MODULE");
     param.put("type", types);
     Long time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-08-07 20:50:28").getTime();
     param.put("createTime", time);
-    String paramStr = JSONObject.toJSONString(param);
+    executeTest("/test/advanced/criteria/multi", param);
 
-    executeTest("/test/advanced/criteria/multi", paramStr);
+    types.add("MODULE");
+    executeTest("/test/advanced/criteria/multi", param);
   }
 
   @Test
@@ -34,13 +33,14 @@ public class AdvancedTests extends BaseTests {
     HashMap<String, Object> param = new HashMap<>();
     param.put("name","testbymiles14");
     List<String> types = new ArrayList<>();
-    types.add("MODULE");
     param.put("type", types);
     Long time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-08-07 20:50:28").getTime();
     param.put("createTime", time);
-    String paramStr = JSONObject.toJSONString(param);
+    executeTest("/test/advanced/order/by", param);
 
-    executeTest("/test/advanced/order/by", paramStr);
+    param.put("name","");
+    types.add("MODULE");
+    executeTest("/test/advanced/order/by", param);
   }
 
   @Test
@@ -48,29 +48,31 @@ public class AdvancedTests extends BaseTests {
     HashMap<String, Object> param = new HashMap<>();
     param.put("name","testbymiles14");
     List<String> types = new ArrayList<>();
-    types.add("MODULE");
     param.put("type", types);
     Long time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-08-07 20:50:28").getTime();
     param.put("createTime", time);
-    String paramStr = JSONObject.toJSONString(param);
+    executeTest("/test/advanced/distinct", param);
 
-    executeTest("/test/advanced/distinct", paramStr);
+
+    types.add("MODULE");
+    executeTest("/test/advanced/distinct", param);
   }
+
 
   @Test
   public void test4() throws Exception {
     HashMap<String, String> param = new HashMap<>();
     param.put("name","testbymiles14");
     param.put("type", "MODULE");
-    String paramStr = JSONObject.toJSONString(param);
-
     for (int i = 0; i < 3; i++) {
-      executeTest("/test/advanced/secondary/cache", paramStr);
+      executeTest("/test/advanced/secondary/cache", param);
     }
   }
 
   /**
    * 一级缓存、二级缓存、不使用AutoExample，三者性能对比测试
+   * 运行完翻到日志最底下，可以看到 性能对比表格
+   * 若想运行本测试，将@Ignore注释掉
    * @throws Exception
    */
   @Test
@@ -79,48 +81,47 @@ public class AdvancedTests extends BaseTests {
     HashMap<String, String> param = new HashMap<>();
     param.put("name","testbymiles14");
     param.put("type", "MODULE");
-    String paramStr = JSONObject.toJSONString(param);
 
-    int count = 1201;
+    int count = 1001;
     ArrayList<Long> list1 = new ArrayList<>();
     ArrayList<Long> list2 = new ArrayList<>();
     ArrayList<Long> list3 = new ArrayList<>();
     ArrayList<Integer> countList = new ArrayList<>();
 
 
-    for (int j = 400; j < count; j += 400) {
+    for (int j = 200; j < count; j += 200) {
       countList.add(j);
 
       long s1 = System.currentTimeMillis();
       for (int i = 0; i < j; i++) {
-        executeTest("/test/and/equal/to", paramStr);
+        executeTest("/test/and/equal/to", param);
       }
       long duration1 = System.currentTimeMillis() - s1;
       list1.add(duration1);
 
       long s2 = System.currentTimeMillis();
       for (int i = 0; i < j; i++) {
-        executeTest("/test/advanced/secondary/cache", paramStr);
+        executeTest("/test/advanced/secondary/cache", param);
       }
       long duration2 = System.currentTimeMillis() - s2;
       list2.add(duration2);
 
       long s3 = System.currentTimeMillis();
       for (int i = 0; i < j; i++) {
-        executeTest("/test/advanced/normal", paramStr);
+        executeTest("/test/advanced/normal", param);
       }
       long duration3 = System.currentTimeMillis() - s3;
       list3.add(duration3);
 
     }
 
-    System.out.printf("%6s %6s %6s %6s %7s %7s %7s\n","请求数","一级缓存","二级缓存","普通查询","一级缓存qps","二级缓存qps","普通查询qps");
+    System.out.printf("%6s %6s %6s %6s %7s %7s %7s\n","请求数","一级缓存耗时","二级缓存耗时","普通查询耗时","一级缓存qps","二级缓存qps","普通查询qps");
     for (int i = 0; i < list1.size(); i++) {
       Integer c = countList.get(i);
       Long d1 = list1.get(i);
       Long d2 = list2.get(i);
       Long d3 = list3.get(i);
-      System.out.printf("%10d %10d %10d %10d %10.2f %10.2f %10.2f\n", c,d1,d2,d3,c*1000f/d1,c*1000f/d2,c*1000f/d3);
+      System.out.printf("%8d %8d %8d %12d %12.2f %10.2f %10.2f\n", c,d1,d2,d3,c*1000f/d1,c*1000f/d2,c*1000f/d3);
     }
   }
 
@@ -129,9 +130,7 @@ public class AdvancedTests extends BaseTests {
     HashMap<String, String> param = new HashMap<>();
     param.put("name","testbymiles13");
     param.put("type", "MODULE");
-    String paramStr = JSONObject.toJSONString(param);
-
-    executeTest("/test/advanced/compatible/with/page/helper", paramStr);
+    executeTest("/test/advanced/compatible/with/page/helper", param);
 
   }
 
@@ -143,13 +142,11 @@ public class AdvancedTests extends BaseTests {
     param.put("ownerId", 1);
     param.put("ownerEmail", "abc@gmail.com");
     param.put("chineseName", "");
-    String paramStr = JSONObject.toJSONString(param);
 
-    executeTest("/test/advanced/present/many/equal/to", paramStr);
+    executeTest("/test/advanced/present/many/equal/to", param);
 
     param.put("chineseName", "aaa");
-    paramStr = JSONObject.toJSONString(param);
-    executeTest("/test/advanced/present/many/equal/to", paramStr);
+    executeTest("/test/advanced/present/many/equal/to", param);
 
 
   }
@@ -161,9 +158,7 @@ public class AdvancedTests extends BaseTests {
     param.put("type", "MODULE");
     param.put("ownerId", 1);
     param.put("ownerEmail", "abc@gmail.com");
-    String paramStr = JSONObject.toJSONString(param);
-
-    executeTest("/test/advanced/present/normal/many/equal/to", paramStr);
+    executeTest("/test/advanced/present/normal/many/equal/to", param);
 
   }
 
