@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://10.115.1.29:3306/live_class?useUnicode=true&characterEncoding=utf-8&autoReconnect=true
-    username: beeschool
-    password: beeschool
+    #url: 数据库配置
+    #username: 数据库配置
+    #password: 数据库配置
 
 mybatis:
   configuration:
@@ -13,7 +13,6 @@ mapper:
   identity: MYSQL
   use-simple-type: false
 
-#以下配置不要在线上开启或者修改级别
 logging:
   level:
-    com.fengxiao.auto.example: DEBUG
+    com.freeperch.auto.example: INFO
